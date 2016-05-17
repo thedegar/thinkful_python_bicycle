@@ -18,6 +18,9 @@ class BicycleShop(object):
     def addInventory(self,Bicycle):
         """Adds a Bicycle to the store's inventory"""
         self.inventory.append(Bicycle)
+        
+    def sell(self,Bicycle):
+        self.inventory.remove(Bicycle)
 
 class Customer(object):
     def __init__(self,name,budget):
@@ -25,10 +28,15 @@ class Customer(object):
         self.budget = budget
         self.bicycle = []
         
-    def buy(self,Bicycle):
+    def buy(self,bike,shop):
         """Adds a Bicycle to the Customer's ownership"""
-        self.bicycle.append(Bicycle)
-        print("{} now own {}.".format(self.name,self.bicycle))
+        if bike in shop.inventory:
+            cost = bike.cost*(1+shop.margin)
+            self.bicycle.append(bike)
+            self.budget -= cost
+            shop.sell(bike)
+        print("{}, you now own a {}.".format(self.name,bike.name))
+        print("You bought it for ${} and have ${} left.".format(cost,self.budget))
         
 def options(customer,shop):
     """Prints out the customer name and the bikes he can afford"""
@@ -80,4 +88,10 @@ if __name__ == "__main__":
     options(lila,ricks)
     
     #Print current inventory for a shop
+    inventory(ricks)
+    
+    #Buy one bike per customer
+    chris.buy(bmx,ricks)
+    peter.buy(moped,ricks)
+    lila.buy(rally,ricks)
     inventory(ricks)
