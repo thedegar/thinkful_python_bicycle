@@ -30,15 +30,6 @@ class Customer(object):
         self.bicycle.append(Bicycle)
         print("{} now own {}.".format(self.name,self.bicycle))
         
-def createData():
-    ricks = BicycleShop("Rick's Bike Shop",0.2)
-    bmx = Bicycle("BMX",100,150)
-    tenSpeed = Bicycle("10 Speed",100,250)
-    rally = Bicycle("Rally Bike",110,800)
-    mountain = Bicycle("Ridge Rider",130,350)
-    trike = Bicycle("Trike",75,100)
-    moped = Bicycle("MoPed",200,350)
-
 def options(customer,shop):
     """Prints out the customer name and the bikes he can afford"""
     print(customer.name + ", you can buy:")
@@ -46,11 +37,29 @@ def options(customer,shop):
     for i in shop.inventory:
         if i.name not in bikes and i.cost * (1+shop.margin) <= customer.budget:
             bikes.append(i.name)
-            print(i.name + " for $" + str(i.cost*(1+shop.margin)))
+            print("    " + i.name + " for $" + str(i.cost*(1+shop.margin)))
+
+def inventory(shop):
+    """Print out the inventory for a bike shop"""
+    bikes = {}
+    for i in shop.inventory:
+        if i.name not in bikes:
+            bikes[i.name] = 1
+        else:
+            bikes[i.name] += 1
+    print(shop.name + " has the following inventory:")
+    print(bikes)
+        
 
 if __name__ == "__main__":
     #Create a bike shop with 6 bike models
-    createData()
+    ricks = BicycleShop("Rick's Bike Shop",0.2)
+    bmx = Bicycle("BMX",100,150)
+    tenSpeed = Bicycle("10 Speed",100,250)
+    rally = Bicycle("Rally Bike",110,800)
+    mountain = Bicycle("Ridge Rider",130,350)
+    trike = Bicycle("Trike",75,100)
+    moped = Bicycle("MoPed",200,350)
     
     for i in range(3):
         ricks.addInventory(bmx)
@@ -70,5 +79,5 @@ if __name__ == "__main__":
     options(peter,ricks)
     options(lila,ricks)
     
-    #prove functionality
-    
+    #Print current inventory for a shop
+    inventory(ricks)
