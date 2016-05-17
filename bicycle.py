@@ -21,6 +21,7 @@ class BicycleShop(object):
         
     def sell(self,Bicycle):
         self.inventory.remove(Bicycle)
+        self.profit += Bicycle.cost*self.margin
 
 class Customer(object):
     def __init__(self,name,budget):
@@ -94,4 +95,7 @@ if __name__ == "__main__":
     chris.buy(bmx,ricks)
     peter.buy(moped,ricks)
     lila.buy(rally,ricks)
+    
+    #Print the current inventory and profit so far
     inventory(ricks)
+    print("{} has made ${} profit.".format(ricks.name,int(ricks.profit)))
