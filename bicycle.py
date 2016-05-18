@@ -3,10 +3,12 @@
 # Bicycle Assignment
 
 class Bicycle(object):
-    def __init__(self,name,weight,cost):
+    def __init__(self,name,wheel,frame):
         self.name = name
-        self.weight = weight
-        self.cost = cost
+        self.weight = wheel.weight*2 + frame.weight
+        self.cost = wheel.cost*2 + frame.cost
+        self.wheels = wheel
+        self.frame = frame
         
 class BicycleShop(object):
     def __init__(self,name,margin):
@@ -39,3 +41,14 @@ class Customer(object):
         print("{}, you now own a {}.".format(self.name,bike.name))
         print("You bought it for ${} and have ${} left.".format(cost,self.budget))
         
+class Wheel(object):
+    def __init__(self,name,weight,cost):
+        self.name = name
+        self.weight = weight
+        self.cost = cost
+
+class Frame(object):
+    def __init__(self,material,weight,cost):
+        self.material = material
+        self.weight = weight
+        self.cost = cost

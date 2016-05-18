@@ -2,7 +2,7 @@
 # Thinkful.com Python Introduction Lesson 3.4
 # Bicycle Assignment
 
-from bicycle import Bicycle, BicycleShop, Customer
+from bicycle import Bicycle, BicycleShop, Customer, Wheel, Frame
 
 def options(customer,shop):
     """Prints out the customer name and the bikes he can afford"""
@@ -28,12 +28,18 @@ def inventory(shop):
 if __name__ == "__main__":
     #Create a bike shop with 6 bike models
     ricks = BicycleShop("Rick's Bike Shop",0.2)
-    bmx = Bicycle("BMX",100,150)
-    tenSpeed = Bicycle("10 Speed",100,250)
-    rally = Bicycle("Rally Bike",110,800)
-    mountain = Bicycle("Ridge Rider",130,350)
-    trike = Bicycle("Trike",75,100)
-    moped = Bicycle("MoPed",200,350)
+    spokeWheel = Wheel("Spokes",35,40)
+    magWheel = Wheel("Mags",25,45)
+    fiberWheel = Wheel("Carbon",10,100)
+    aluminumFrame = Frame("Aluminum",100,100)
+    carbonFrame = Frame("Carbon",50,500)
+    steelFrame = Frame("Steel",200,75)
+    bmx = Bicycle("BMX",magWheel,steelFrame)
+    tenSpeed = Bicycle("10 Speed",spokeWheel,carbonFrame)
+    rally = Bicycle("Rally Bike",fiberWheel,carbonFrame)
+    mountain = Bicycle("Ridge Rider",spokeWheel,aluminumFrame)
+    trike = Bicycle("Trike",spokeWheel,steelFrame)
+    moped = Bicycle("MoPed",spokeWheel,steelFrame)
     
     for i in range(3):
         ricks.addInventory(bmx)
